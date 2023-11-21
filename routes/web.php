@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BiodataController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +17,22 @@ use App\Http\Controllers\ProductsController;
 */
 
 Route::get('/', function () {
-    return view('admin.index');
+    return view('welcome');
 });
-// Route::get('/biodata', [BiodataController::class, 'show']);
 
-// Route::get('/biodata', [BiodataController::class, 'show']);
-// Route::get('/home', [HomeController::class, 'index']);
+Route::get('/dashboard', function () {
+    return view('admin.index');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
 Route::prefix('product')->group(function(){
     Route::get('/view', [ProductsController::class, 'ProductView'])->name('products.view');
