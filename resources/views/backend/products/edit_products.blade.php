@@ -38,27 +38,45 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="product_name">Product Name</label>
-                    <input type="text" name="product_name" value="{{ $editData->product_name }}" class="form-control" required data-validation-required-message="This field is required">
+                    <input type="text" name="product_name" value="{{ $editData->product_name }}" class="form-control @error('product_name') is-invalid @enderror" required data-validation-required-message="This field is required" value="{{ old('product_name')}}">
+                    @error('product_name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="category_id">Category ID</label>
-                    <input type="text" name="category_id" value="{{ $editData->category_id }}" class="form-control" required data-validation-required-message="This field is required">
+                    <input type="text" name="category_id" value="{{ $editData->category_id }}" class="form-control @error('category_id') is-invalid @enderror" required data-validation-required-message="This field is required" value="{{ old('category_id') }}">
+                    @error('category_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="product_code">Products Code</label>
-                    <input type="text" name="product_code" value="{{ $editData->product_code }}" class="form-control" required data-validation-required-message="This field is required">
+                    <input type="text" name="product_code" value="{{ $editData->product_code }}" class="form-control @error('product_code') is-invalid @enderror" required data-validation-required-message="This field is required" value="{{ old('product_code') }}">
+                    @error('product_code')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" name="description" value="{{ $editData->description }}" class="form-control" required data-validation-required-message="This field is required">
+                    <input type="text" name="description" value="{{ $editData->description }}" class="form-control @error('description') is-invalid @enderror" required data-validation-required-message="This field is required" value="{{ old('description') }}">
+                    @error('description')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror 
                   </div>
                   <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="text" name="price" value="{{ $editData->price }}" class="form-control" required data-validation-required-message="This field is required">
+                    <input type="text" name="price" value="{{ $editData->price }}" class="form-control @error('price') is-invalid @enderror" required data-validation-required-message="This field is required" value="{{ old('price') }}">
+                    @error('price')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="stock">Stock</label>
-                    <input type="number" name="stock" value="{{ $editData->stock }}" class="form-control" required data-validation-required-message="This field is required">
+                    <input type="number" name="stock" value="{{ $editData->stock }}" class="form-control @error('stock') is-invalid @enderror" required data-validation-required-message="This field is required" value="{{ old('stock') }}">
+                    @error('stock')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
                 <!-- /.card-body -->

@@ -38,27 +38,45 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="product_name">Product Name</label>
-                    <input type="text" name="product_name" class="form-control" id="product_name" placeholder="Product Name">
+                    <input type="text" name="product_name" class="form-control @error('product_name') is-invalid @enderror" id="product_name" placeholder="Product Name" required value="{{ old('product_name') }}">
+                    @error('product_name')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="category_id">Category ID</label>
-                    <input type="text" name="category_id" class="form-control" id="category_id" placeholder="Category ID">
+                    <input type="text" name="category_id" class="form-control @error('category_id') is-invalid @enderror" id="category_id" placeholder="Category ID" required value="{{ old('category_id') }}">
+                    @error('category_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="product_code">Products Code</label>
-                    <input type="text" name="product_code" class="form-control" id="product_code" placeholder="Product Code">
+                    <input type="text" name="product_code" class="form-control @error('product_code') is-invalid @enderror" id="product_code" placeholder="Product Code" required value="{{ old('product_code') }}">
+                    @error('product_code')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" name="description" class="form-control" id="description" placeholder="Description">
+                    <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Description" required value="{{ old('description') }}">
+                    @error('description')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="text" name="price" class="form-control" id="price" placeholder="Price">
+                    <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" id="price" placeholder="Price" required value="{{ old('price') }}">
+                    @error('price')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="stock">Stock</label>
-                    <input type="number" name="stock" class="form-control" id="stock" placeholder="Stock">
+                    <input type="number" name="stock" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Stock" required value="{{ old('stock') }}">
+                    @error('stock')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
                 <!-- /.card-body -->

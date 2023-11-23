@@ -21,13 +21,22 @@ class ProductsController extends Controller
 
     public function ProductStore(Request $request) {
 
-        $data=new products();
-        $data->product_name=$request->product_name;
-        $data->category_id=$request->category_id;
-        $data->product_code=$request->product_code;
-        $data->description=$request->description;
-        $data->price=$request->price;
-        $data->stock=$request->stock;
+        $validatedData = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'category_id' => 'required|exists:product_categories,id',
+            'product_code' => 'required|string|unique:products,product_code',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+        ]);
+    
+        $data = new products();
+        $data->product_name = $validatedData['product_name'];
+        $data->category_id = $validatedData['category_id'];
+        $data->product_code = $validatedData['product_code'];
+        $data->description = $validatedData['description'] ?? null;
+        $data->price = $validatedData['price'];
+        $data->stock = $validatedData['stock'];
         $data->save();
 
         return redirect()->route('products.view')->with('info', 'Tambah Product berhasil');
@@ -42,13 +51,22 @@ class ProductsController extends Controller
 
     public function ProductUpdate(Request $request, $id) {
 
-        $data=products::find($id);
-        $data->product_name=$request->product_name;
-        $data->category_id=$request->category_id;
-        $data->product_code=$request->product_code;
-        $data->description=$request->description;
-        $data->price=$request->price;
-        $data->stock=$request->stock;
+        $validatedData = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'category_id' => 'required|exists:product_categories,id',
+            'product_code' => 'required|string|unique:products,product_code,'.$id,
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+        ]);
+    
+        $data = products::find($id);
+        $data->product_name = $validatedData['product_name'];
+        $data->category_id = $validatedData['category_id'];
+        $data->product_code = $validatedData['product_code'];
+        $data->description = $validatedData['description'] ?? null;
+        $data->price = $validatedData['price'];
+        $data->stock = $validatedData['stock'];
         $data->save();
 
         return redirect()->route('products.view')->with('info', 'Update Product berhasil');
