@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+
 });
+
+Route::post('products', [AuthController::class, 'createproducts']);
+Route::get('products', [AuthController::class, 'read']);
+Route::get('/products/{id}', [AuthController::class, 'readbyId']);
+Route::put('/productsUpdate/{id}', [AuthController::class, 'updateproducts']);
+Route::delete('/productsDelete/{id}', [AuthController::class, 'deletebyId']);
