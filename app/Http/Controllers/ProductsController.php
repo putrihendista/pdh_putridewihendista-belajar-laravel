@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\products;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -79,5 +80,20 @@ class ProductsController extends Controller
         $deleteData->delete();
 
         return redirect()->route('products.view')->with('info', 'Delete Product berhasil');
+    }
+
+    public function chart() {
+        $productCategories = DB::table('products')
+        ->select('category_id', DB::raw('count(*) AS total_products'), DB::raw('SUM(price) AS total_price'),
+        DB::raw('SUM(stock) AS total_stock'))
+        ->groupBy('category_id')
+        ->get();
+
+    $categories = $productCategories->pluck('category_id')->toArray();
+    $totalProducts = $productCategories->pluck('total_products')->toArray();
+    $totalPrice = $productCategories->pluck('total_price')->toArray();
+    $totalStock = $productCategories->pluck('total_stock')->toArray();
+
+    return view('backend.products.products_grafis', compact('categories', 'totalProducts', 'totalPrice', 'totalStock'));
     }
 }
